@@ -132,3 +132,9 @@ If you're new to Git and GitHub, this beginner-friendly tutorial is recommended:
 [https://www.youtube.com/watch?v=a9u2yZvsqHA](https://www.youtube.com/watch?v=a9u2yZvsqHA)
 
 Good luck, and happy debugging! 🐍
+
+## Participant Details
+
+**Full Name:** Farisha N A  
+**Email Address:** farishana@gmail.com  
+**Phone Number:** 7736823952
