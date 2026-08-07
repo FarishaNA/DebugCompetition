@@ -1,3 +1,4 @@
+from collections import Counter
 def find_anagrams(s: str, p: str) -> list[int]:
     """
     Given two strings s and p, return an array of all the start indices of p's 
@@ -20,23 +21,31 @@ def find_anagrams(s: str, p: str) -> list[int]:
     ns, np = len(s), len(p)
     if ns < np:
         return []
+    
+    if np == 0:
+        return []
         
-    p_count = {}
-    for char in p:
-        p_count[char] = p_count.get(char, 0) + 1
-        
-    s_count = {}
+    p_count = Counter(p)
+    s_count = Counter(s[:np])
     res = []
+    if p_count == s_count:
+        res.append(0)
     
     # Buggy sliding window logic. The window only grows and never shrinks 
     # when the size exceeds len(p). Additionally, characters are never removed 
     # from s_count. Students must design and implement the correct sliding window 
     # map-updating bounds from scratch.
-    for i in range(ns):
-        char = s[i]
-        s_count[char] = s_count.get(char, 0) + 1
-        
+    for i in range(np, ns):
+
+        s_count[s[i]] += 1
+
+        s_count[s[i - np]] -= 1
+
+        if s_count[s[i - np]] == 0:
+            del s_count[s[i - np]]
+
         if s_count == p_count:
             res.append(i - np + 1)
+    
             
     return res

@@ -14,7 +14,7 @@ def subarray_sum(nums: list[int], k: int) -> int:
     """
     count = 0
     curr_sum = 0
-    prefix_sums = {}
+    prefix_sums = {0:1}
     
     for num in nums:
         curr_sum += num

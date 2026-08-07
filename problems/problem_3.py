@@ -23,16 +23,29 @@ def three_sum(nums: list[int]) -> list[list[int]]:
     for i in range(len(nums) - 2):
         if i > 0 and nums[i] == nums[i - 1]:
             continue
-            
-        # Naive and broken implementation:
-        # Pointers are initialized, but the movement logic is naive and incorrect.
-        # It does not handle duplicate skipping or correct two-pointer adjustment,
-        # requiring students to rewrite this section.
+
+        target = -nums[i]
         l, r = i + 1, len(nums) - 1
+
         while l < r:
-            s = nums[i] + nums[l] + nums[r]
-            if s == 0:
+            s = nums[l] + nums[r]
+
+            if s == target:
                 res.append([nums[i], nums[l], nums[r]])
-            l += 1
+
+                low = nums[l]
+                while l < r and nums[l] == low:
+                    l += 1
+
+                high = nums[r]
+                while l < r and nums[r] == high:
+                    r -= 1
+
+            elif s > target:
+                r -= 1
+
+            else:
+                l += 1
+            
             
     return res

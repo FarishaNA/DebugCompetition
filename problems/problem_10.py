@@ -24,17 +24,21 @@ def decode_string(s: str) -> str:
     # Naive stack-free parser that is highly incorrect.
     # It cannot handle nested brackets (like 3[a2[c]]) or multiple blocks.
     # Students must implement stack state tracking from scratch.
-    res = ""
+    current = ""
     curr_num = 0
+    stack = []
     for char in s:
         if char.isdigit():
             curr_num = curr_num * 10 + int(char)
         elif char == "[":
-            pass
-        elif char == "]":
-            res = res * curr_num
+            stack.append((current, curr_num))
+            current = ""
             curr_num = 0
+
+        elif char == "]":
+            prev, repeat = stack.pop()
+            current = prev + current * repeat
         else:
-            res += char
+            current += char
             
-    return res
+    return current
